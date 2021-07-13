@@ -1,7 +1,10 @@
 <template>
 <div>
+    <div class="titulo">
+        <h2>New task</h2>
+    </div>
+
     <Form/>
-    <h2>ojoadjao</h2>
 </div>
 </template>
 
@@ -16,5 +19,14 @@ export default {
 </script>
 
 <style>
+.titulo{
+    width: 99%;
+    text-align: center;
+font-family: 'Poppins', sans-serif;
+}
+.v-label.theme--light{
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+}
 
 </style>

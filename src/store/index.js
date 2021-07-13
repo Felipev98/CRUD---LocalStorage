@@ -13,13 +13,32 @@ export default new Vuex.Store({
 
   },
   mutations: {
-    agregandoTarea:(state,newTarea) => state.tareas.push(newTarea),
-    eliminandoTarea:(state,id) =>  (state.tareas = state.tareas.filter(tarea => tarea.id != id )),    
+    cargar(state,payload){
+      state.tareas= payload
+    },
+    agregandoTarea(state,newTarea){
+      state.tareas.push(newTarea)
+      localStorage.setItem("tareas",JSON.stringify(state.tareas))
+    }
+    ,
+    eliminandoTarea(state,id){
+      state.tareas = state.tareas.filter(tarea => tarea.id != id )
+      localStorage.setItem("tareas",JSON.stringify(state.tareas))
+ 
+    }    
   },
   actions: {
     
     agregarTarea: ({commit},newTarea) =>commit('agregandoTarea',newTarea),
-    eliminarTarea: ({commit},id) => commit('eliminandoTarea',id)
+    eliminarTarea: ({commit},id) => commit('eliminandoTarea',id),
+    cargarLocalStorage({commit}){
+      if(localStorage.getItem("tareas")){
+        const tareas = JSON.parse(localStorage.getItem("tareas"))
+        commit('cargar',tareas)
+        return 
+      }
+      localStorage.setItem("tareas",JSON.stringify([]))
+    }
   },
   modules: {
   }

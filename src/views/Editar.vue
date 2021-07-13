@@ -1,7 +1,6 @@
 <template>
   <div>
 <Form editar :tarea="tarea"/>
-      {{tarea}}
   </div>
 </template>
 

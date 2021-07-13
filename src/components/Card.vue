@@ -1,9 +1,23 @@
 <template>
 <div>
-  <h2>{{tarea.title}}</h2>
-  <span>{{tarea.content}}</span>
-  <button  @click="editar(tarea.id)">Editar</button>
-  <button @click="eliminar(tarea.id)">Eliminar</button>
+<v-card
+    max-width="585"
+  >
+    <v-card-title>
+      <span class="titulos">{{tarea.title}}</span>
+    </v-card-title>
+    <v-card-subtitle>
+      <span>{{tarea.date}}</span>
+    </v-card-subtitle>
+    <v-card-text>
+        <span>{{tarea.content}}</span>
+      <p>{{tarea.estado}}</p>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn @click="editar(tarea.id)" class="botones" >Editar</v-btn>
+      <v-btn @click="eliminar(tarea.id)" class="botones" >Eliminar</v-btn>
+    </v-card-actions>
+  </v-card>
 </div>
 </template>
 
@@ -14,9 +28,11 @@ props:{
   tarea:{
     type:Object,
     default:() => ({
-      id:0,
       title: '',
-      content:''
+      content:'',
+      date:'',
+      estado:''
+      
     })
   }
 
@@ -33,5 +49,39 @@ methods:{
 </script>
 
 <style>
-
+body{
+  background-color: #f6f4ff;
+}
+.v-card.v-card--flat.v-sheet.theme--light.rounded-0.grey.lighten-4{
+  height: 120px !important;
+  background-color: transparent;
+}
+.v-card.v-sheet.theme--light{
+  margin: auto;
+}
+.v-card.v-sheet.theme--light:last-child{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.theme--dark.v-btn.v-btn--has-bg{
+  background-color: #02bdf2 !important;
+}
+.botones{
+  background: #02bdf2 !important;
+  color: white !important;
+  font-family: 'Poppins', sans-serif;;
+}
+.botones:last-child{
+  background: #c82833 !important;
+}
+span{
+  font-family: 'Poppins', sans-serif;
+}
+p{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.titulos{
+  font-weight: 700;
+}
 </style>
