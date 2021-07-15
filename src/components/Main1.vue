@@ -4,7 +4,7 @@
      <div class="container">
 
   <div class="row">
-<div class="col-md-3">
+<div class="col-md-4 col-xl-3">
       <div class="card card-inverse  text-center">
         <img class="card-img-top imagen-1" src="../assets/ave1.png" alt="Card image cap">
         <div class="card-block">
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4  col-xl-3">
       <div class="card card-inverse  text-center">
         <img class="card-img-top imagen-1" src="../assets/ave22.png" alt="Card image cap">
         <div class="card-block">
@@ -29,7 +29,7 @@
     </div>
 
 
-    <div class="col-md-3">
+    <div class="col-md-4  col-xl-3">
       <div class="card card-inverse  text-center">
         <img class="card-img-top imagen-1" src="../assets/ave33.png" alt="Card image cap">
         <div class="card-block">
@@ -79,21 +79,58 @@ width: 90rem !important;
     padding: 1rem !important;
     border-radius: 1.5rem;
     box-shadow: 0px 9px 32px -1px black;
+    transition:  all 0.3s ease-in-out;
+}
+.card.card.card-inverse.text-center:hover{
+    box-shadow: 0px 9px 42px -1px #ffc107;
 }
 .card-title{
     color: white;
     font-weight: 700;
     padding-top: 0.8rem;
+      font-family: 'Mazzard',sans-serif;
+font-weight: 900;
 }
 .card-subtext{
     color: white;
     opacity: 0.68;
+          font-family: 'Mazzard',sans-serif;
+
 }
 .card-text{
     color: white;
     opacity: 0.48;
+          font-family: 'Mazzard',sans-serif;
+
 }
 .span{
     color: #0549FF;
+          font-family: 'Mazzard',sans-serif;
+
 }
+/* Media Queries */
+@media screen and (max-width:900px) {
+  .card.card.card-inverse.text-center{
+    margin-top: 1rem;
+  }
+}
+@media screen and (min-width:767px) and (max-width:900px) {
+.main-section{
+  height: 0;
+}
+.imagen img{
+  padding-top: 5rem;
+  transform: translateX(224px) !important;
+}
+.imagen{
+  padding-top: 0 !important;
+}
+
+}
+  @media screen and (min-width:900px) and (max-width:1100px) {
+   .main-section{
+     height: 40vh;
+   }
+  }
+
 </style>
