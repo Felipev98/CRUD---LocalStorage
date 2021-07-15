@@ -1,4 +1,5 @@
 # Prueba técnica Front-End #2
+![prueba2](https://user-images.githubusercontent.com/83327665/125729421-6f791cb4-0c86-492c-b098-2f390e0891bd.jpg)
 
 _Objetivo: Desarrollar el prototipado lo más fiel posible al proporcionado. Con los siguientes requerimientos:_
 - Evaluaremos tu performance en la actividad observando el tiempo de desarrollo y calidad de entrega (código limpio y sin bugs de implementación).
@@ -14,6 +15,8 @@ _El siguiente desafio fue contruido con las siguientes herramientas:_
 
 * Vue.js - El framework web usado
 * BootstrapVue - Empleado para los estilos de la página
+
+
 
 
 ## Despliegue 📦
