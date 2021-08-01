@@ -1,23 +1,34 @@
 <template>
   <div>
   <v-container>
-
     <v-textarea
         solo
         label="¿Qué vas hacer?"
-        v-model="title"          
+        v-model="$v.title.$model"          
     ></v-textarea>
+    <div class="campo-requerido">
+    <small  v-if="!$v.title.required">Campo requerido</small>
+    <small  v-if="!$v.title.minLength">Mínimo 5 caracteres</small>
+    </div>
      <v-textarea
         solo
         label="Añade una descripción"
-        v-model="content"          
+        v-model="$v.content.$model"          
     ></v-textarea>
+    <div class="campo-requerido">
+    <small  v-if="!$v.content.required">Campo requerido</small>
+    <small v-if="!$v.content.minLength">Mínimo 5 caracteres</small>
+    </div>
      <v-textarea
         solo
         label="Añade un comentario"
-        v-model="date"          
+        v-model="$v.date.$model"          
     ></v-textarea>
-    <v-radio-group v-model="estado" class="radio">
+    <div class="campo-requerido">
+    <small  v-if="!$v.date.required">Campo requerido</small>
+    <small v-if="!$v.date.minLength">Mínimo 5 caracteres</small>
+    </div>
+    <v-radio-group v-model="$v.estado.$model" class="radio">
       <v-radio
         value="Completada"
         label="Completada"
@@ -27,23 +38,30 @@
         label="Pendiente"
       ></v-radio>
     </v-radio-group>
+    <div class="campo-requerido">
+    <small  v-if="!$v.estado.required">Campo requerido</small>
+
+    </div>
        <v-card-actions>
       <v-btn @click="$router.push('/')" class="botoness">Cancelar</v-btn>
-      <v-btn v-if="!editar" @click="agregar" class="botoness" >Agregar</v-btn>
-    <v-btn v-else @click="guardar" class="botoness" >Editar</v-btn>
+      <v-btn v-if="!editar" @click="agregar" class="botoness" :disabled="$v.$invalid" >Agregar</v-btn>
+    <v-btn v-else @click="guardar" class="botoness" :disabled="$v.$invalid">Editar</v-btn>
     </v-card-actions>
   </v-container>
-    
   </div>
 </template>
-
 <script>
 import short from 'short-uuid'
+import { required, minLength } from 'vuelidate/lib/validators'
 export default {
     name:'Form',
     data() {
         return {
-            radio:["Completado","No completado"]
+            radio:["Completado","No completado"],
+                        content:'',
+            title:'',
+            date:'',
+            estado:''
         }
     },
     props:{
@@ -69,14 +87,6 @@ export default {
             this.tarea= JSON.parse(data);
         }
     },
-    data() {
-        return {
-            content:'',
-            title:'',
-            date:'',
-            estado:''
-        }
-    },
     methods:{
         agregar(){
             this.$store.dispatch('agregarTarea',{
@@ -85,7 +95,6 @@ export default {
                 content:this.content,
                 date:this.date,
                 estado:this.estado
-                
             })
         this.$swal({
         toast: true,
@@ -93,11 +102,9 @@ export default {
         showConfirmButton: false,
         timer: 3000,
         icon: 'success',
-        text: '¡Tarea agregada con exito!',
+        text: '¡Tarea agregada con éxito!',
         }),
-         
          this.$router.push('/')
-         
         },
         guardar(){
             this.$store.dispatch('eliminarTarea',this.tarea.id)
@@ -107,7 +114,6 @@ export default {
                 content:this.content,
                 date:this.date,
                 estado:this.estado
-
             })
             this.$swal({
         toast: true,
@@ -115,7 +121,7 @@ export default {
         showConfirmButton: false,
         timer: 3000,
         icon: 'success',
-        text: '¡Tarea editada con exito!',
+        text: '¡Tarea editada con éxito!',
         }),
           this.$router.push('/')
         },
@@ -125,8 +131,14 @@ export default {
             this.content = this.tarea.content
             this.date = this.tarea.date,
             this.estado= this.tarea.estado
+        },
+    },
+    validations:{
+            title:{required,minLength:minLength(6)},
+            content:{required,minLength:minLength(6)},
+            date:{required,minLength:minLength(6)},
+            estado:{required}
         }
-    }
 }
 </script>
 
@@ -145,6 +157,14 @@ export default {
 }
 .v-input--radio-group__input{
     transform: translateX(45%);
+}
+    .campo-requerido{
+        text-align: center;
+        margin-bottom: 1rem;
+}
+.campo-requerido small{
+    color: #EC1B1B;
+    font-family: 'Poppins', sans-serif;
 }
 @media screen and (max-width:1000px){
     .v-input--radio-group__input{

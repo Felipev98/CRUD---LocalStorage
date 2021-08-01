@@ -17,7 +17,6 @@ export default {
     }
 }
 </script>
-
 <style>
 .titulo{
     width: 99%;

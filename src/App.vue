@@ -24,9 +24,7 @@
             <v-list-item-title class="titulo-perfil">Tareas</v-list-item-title>
           </v-list-item-content>
     </v-list-item>
-
   </v-navigation-drawer>
-
   <transition mode="out-in" enter-active-class="animate__animated animate__bounceInLeft" leave-active-class="animate__animated animate__bounceOutLeft">
       <router-view/>
   </transition>

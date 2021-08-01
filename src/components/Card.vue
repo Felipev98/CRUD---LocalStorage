@@ -35,7 +35,6 @@ props:{
       
     })
   }
-
 },
 methods:{
   eliminar(id){
@@ -62,7 +61,6 @@ methods:{
           this.$store.dispatch("eliminarTarea",id)
     )
   }
-
 })
   },
   editar(id){
