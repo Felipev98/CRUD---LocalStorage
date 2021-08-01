@@ -1,9 +1,16 @@
 <template>
 <div>
+  <v-container>
   <div class="home-titulo">
-    <span  >All for Today:</span>
+    <span  >Mis tareas:</span>
+     <div>
+    <v-text-field label="Buscar" v-model="task"
+    ></v-text-field>
   </div>
-  <Card v-for="tarea in tareas" :key="tarea.id" :tarea="tarea"/>
+
+  </div>
+  <div v-if="filteredCards.length !== 0">
+  <Card v-for="tarea in filteredCards" :key="tarea.id" :tarea="tarea"/>
   <router-link to="/agregar" > <v-fab-transition>
                 <v-btn
                   fab
@@ -15,13 +22,25 @@
                   <v-icon>mdi-plus</v-icon>
                 </v-btn>
               </v-fab-transition></router-link>
+  </div>
+<div v-else>
+  <div class="texto-tarea">
+  <p>No se ha encontrado esa tarea</p>
+
+  </div>
 </div>
+  </v-container>
 
+</div>
 </template>
-
 <script>
 import Card from '../components/Card.vue'
 export default {
+  data() {
+    return {
+      task:'',      
+    }
+  },
   name: 'Home',
   components: {
     Card
@@ -29,13 +48,19 @@ export default {
   computed:{
     tareas(){
       return this.$store.getters.getTareas
+    },    
+    filteredCards(){
+      return this.tareas.filter((tarea)=>{
+        return tarea.title.match(this.task)
+      })
+
     }
   },
 }
 </script>
 <style >
   .v-btn--fab.v-size--default.v-btn--absolute.v-btn--bottom{
-    bottom: 35px !important;
+    
   }
   .v-card__actions{
     justify-content: space-evenly;
@@ -47,8 +72,18 @@ export default {
   .home-titulo{
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    transform: translateX(29%);
     font-size: 1.3rem;
+    text-align: center;
+
   }
-  
+  .texto-tarea{
+  text-align: center;
+  margin-top: 2rem;
+  color: #C81F1F;
+  }
+  @media screen and (max-width:1025px){
+    .home-titulo{
+      transform: translateX(0);
+    }
+  }
 </style>

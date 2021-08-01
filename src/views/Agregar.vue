@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="titulo">
-        <h2>New task</h2>
+        <h2>Nuevas tareas</h2>
     </div>
 
     <Form/>

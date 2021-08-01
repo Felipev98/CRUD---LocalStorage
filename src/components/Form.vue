@@ -4,17 +4,17 @@
 
     <v-textarea
         solo
-        label="what are you going to do?"
+        label="¿Qué vas hacer?"
         v-model="title"          
     ></v-textarea>
      <v-textarea
         solo
-        label="Add a description"
+        label="Añade una descripción"
         v-model="content"          
     ></v-textarea>
      <v-textarea
         solo
-        label="Add a date"
+        label="Añade un comentario"
         v-model="date"          
     ></v-textarea>
     <v-radio-group v-model="estado" class="radio">
@@ -85,8 +85,19 @@ export default {
                 content:this.content,
                 date:this.date,
                 estado:this.estado
+                
             })
+        this.$swal({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        icon: 'success',
+        text: '¡Tarea agregada con exito!',
+        }),
+         
          this.$router.push('/')
+         
         },
         guardar(){
             this.$store.dispatch('eliminarTarea',this.tarea.id)
@@ -98,6 +109,14 @@ export default {
                 estado:this.estado
 
             })
+            this.$swal({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        icon: 'success',
+        text: '¡Tarea editada con exito!',
+        }),
           this.$router.push('/')
         },
         async assignValues(){
@@ -126,5 +145,13 @@ export default {
 }
 .v-input--radio-group__input{
     transform: translateX(45%);
+}
+@media screen and (max-width:1000px){
+    .v-input--radio-group__input{
+        width:0 !important;
+    }
+    .v-input.v-textarea.theme--light.v-text-field.v-text-field--single-line.v-text-field--solo.v-text-field--is-booted.v-text-field--enclosed{
+        width:100%
+    }
 }
 </style>

@@ -39,7 +39,31 @@ props:{
 },
 methods:{
   eliminar(id){
-    this.$store.dispatch("eliminarTarea",id)
+    this.$swal.fire({
+  title: '¿Estás seguro?',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  cancelButtonText:'Cancelar',
+  confirmButtonText: 'Sí, eliminar esta tarea',
+  showClass: {
+    popup: 'animate__animated animate__rollIn'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__rollOut'
+  }
+}).then((result) => {
+  if (result.isConfirmed) {
+    this.$swal.fire(
+      '¡Eliminada!',
+      'Su tarea ha sido eliminada',
+      'success',
+          this.$store.dispatch("eliminarTarea",id)
+    )
+  }
+
+})
   },
   editar(id){
     this.$router.push({path:'editar',query:{id}})
